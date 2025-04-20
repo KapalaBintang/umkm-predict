@@ -35,7 +35,7 @@ cd instatrend
 2. Install dependencies:
 
 ```bash
-pnpm install
+npm install
 ```
 
 3. Create a `.env` file in the root directory with your Firebase configuration:
@@ -54,7 +54,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 4. Run the development server:
 
 ```bash
-pnpm dev
+npm dev
 ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
