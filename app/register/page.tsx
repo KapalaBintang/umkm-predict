@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import { TrendingUp, Loader2, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/auth-context";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -21,6 +22,13 @@ export default function RegisterPage() {
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/use/dashboard");
+    }
+  }, [user, router]);
 
   const handleEmailRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,7 +82,7 @@ export default function RegisterPage() {
         title: "Login Berhasil",
         description: "Selamat datang di UMKM Insight",
       });
-      router.push("/dashboard");
+      router.push("/use/dashboard");
     } catch (error: any) {
       console.error("Google login error:", error);
       toast({
