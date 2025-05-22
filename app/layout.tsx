@@ -1,35 +1,34 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { AuthProvider } from "@/contexts/auth-context";
-import { ThemeProvider } from "@/components/theme-provider";
-import { PageTransitionProvider } from "@/components/page-transition-provider";
-import { Toaster } from "@/components/ui/toaster";
+import type React from "react"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "@/components/theme-provider"
+import { cookies } from 'next/headers';
+import { SESSION_COOKIE_NAME } from '@/constants'; // added
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Gemini SME Forecast",
-  description: "AI-powered market trend analysis and forecasting for SMEs",
-  generator: "v0.dev",
-};
+  title: "UMKM Predict - Prediksi Harga Bahan Pokok",
+  description: "Aplikasi prediksi harga bahan pokok untuk UMKM sektor kuliner",
+    generator: 'v0.dev'
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
+  const session = cookies().get(SESSION_COOKIE_NAME)?.value || null;
   return (
-    <html lang="en">
+    <html lang="id" className="scroll-smooth" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <AuthProvider>
-            <PageTransitionProvider>{children}</PageTransitionProvider>
-          </AuthProvider>
+        <ThemeProvider defaultTheme="system" storageKey="umkm-predict-theme">
+          {children}
+          <Toaster />
         </ThemeProvider>
-        <Toaster />
       </body>
     </html>
-  );
+  )
 }

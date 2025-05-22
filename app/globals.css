@@ -33,23 +33,6 @@
     --ring: 221.2 83.2% 53.3%;
 
     --radius: 0.5rem;
-
-    /* Chart colors */
-    --chart-1: 142.1 76.2% 36.3%;
-    --chart-2: 221.2 83.2% 53.3%;
-    --chart-3: 35.5 91.7% 32.9%;
-    --chart-4: 262.1 83.3% 57.8%;
-    --chart-5: 24.6 95% 53.1%;
-
-    /* Sidebar colors - enhanced */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -80,16 +63,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
-
-    /* Sidebar colors - enhanced */
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 0 0% 98%;
-    --sidebar-primary-foreground: 240 5.9% 10%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -99,212 +72,54 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Animation utilities */
-@layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-in-out;
-  }
-
-  .animate-slide-down {
-    animation: slideDown 0.5s ease-in-out;
-  }
-
-  .animate-slide-left {
-    animation: slideLeft 0.5s ease-in-out;
-  }
-
-  .animate-slide-right {
-    animation: slideRight 0.5s ease-in-out;
-  }
-
-  .animate-scale {
-    animation: scale 0.3s ease-in-out;
-  }
-
-  .animate-bounce-light {
-    animation: bounceLight 2s infinite;
-  }
-
-  .animate-pulse-light {
-    animation: pulseLight 2s infinite;
-  }
-
-  /* Sidebar utilities */
-  .sidebar-item-active {
-    @apply bg-primary/10 text-primary font-medium;
-  }
-
-  .sidebar-item-hover {
-    @apply hover:bg-muted/50 transition-all duration-200;
-  }
-
-  .sidebar-icon-container {
-    @apply p-1.5 rounded-md;
-  }
-
-  .sidebar-icon-active {
-    @apply bg-primary/10 text-primary;
-  }
-
-  .sidebar-icon-default {
-    @apply text-muted-foreground;
-  }
-
-  /* Sidebar scrollbar styling */
-  .sidebar-content::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .sidebar-content::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .sidebar-content::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-  }
-
-  .dark .sidebar-content::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .sidebar-content::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-
-  .dark .sidebar-content::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
+/* Transisi halus untuk perubahan tema */
+.dark body,
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Animation keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+/* scrollbar.css */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(96, 165, 250, 0.5); /* blue-400 semi-transparent */
+  border-radius: 9999px;
+  transition: background-color 0.2s;
 }
 
-@keyframes slideLeft {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(59, 130, 246, 0.8); /* blue-500 */
 }
 
-@keyframes slideRight {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+/* Dark mode support */
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(147, 197, 253, 0.3); /* blue-300 */
 }
 
-@keyframes scale {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(147, 197, 253, 0.6); /* blue-300 hover */
 }
 
-@keyframes bounceLight {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+
+/* Transisi untuk elemen lain */
+button,
+a,
+input,
+select,
+textarea {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
-@keyframes pulseLight {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
 
-/* Transition utilities */
-.transition-all-fast {
-  transition: all 0.2s ease-in-out;
-}
-
-.transition-all-medium {
-  transition: all 0.3s ease-in-out;
-}
-
-.transition-all-slow {
-  transition: all 0.5s ease-in-out;
-}
-
-/* Hover effects */
-.hover-lift {
-  transition: transform 0.2s ease-in-out;
-}
-
-.hover-lift:hover {
-  transform: translateY(-2px);
-}
-
-.hover-grow {
-  transition: transform 0.2s ease-in-out;
-}
-
-.hover-grow:hover {
-  transform: scale(1.02);
-}
-
-/* Card hover effects */
-.card-hover {
-  transition: all 0.3s ease-in-out;
-}
-
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-}
